@@ -1,0 +1,66 @@
+<div class="palm-page-header">
+	<div class="header-icon calesco"></div>
+	<div class="header-text">
+		<span>Preferences</span>
+	</div>
+</div>
+<div class="palm-group">
+	<div class="palm-group-title">
+		<span>Tea Settings</span>
+	</div>
+	<div class="palm-list">
+		<div class="palm-row single">
+			<div id="selTempUnit" x-mojo-element="ListSelector"></div>
+		</div>
+	</div>
+</div>
+<div class="palm-group">
+	<div class="palm-group-title">
+		<span>Timer Settings</span>
+	</div>
+	<div class="palm-list">
+		<div class="palm-row single">
+			<div class="palm-row-wrapper">
+				<table class="palm-list-section-label"><tr>
+				<td><div class="title">Autostart</div></td>
+				<td><div id="togAutostart" x-mojo-element="ToggleButton"></div></td>
+				</tr></table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="palm-group">
+	<div class="palm-group-title">
+		<span>Alarm Settings</span>
+	</div>
+	<div class="palm-list">
+		<div class="palm-row first">
+			<div class="palm-row-wrapper">
+				<table class="palm-list-section-label"><tr>
+				<td><div class="title">Vibrate</div></td>
+				<td><div id="togAlarmVibrate" x-mojo-element="ToggleButton"></div></td>
+				</tr></table>
+			</div>
+		</div>
+		<div id="alarmSoundRow" class="palm-row" x-mojo-tap-highlight="momentary">
+			<div class="palm-row-wrapper">
+				<div class="label">Sound</div>
+				<div id="alarmSoundName" class="title truncating-text"></div>
+			</div>
+		</div>
+		<div class="palm-row">
+			<div class="palm-row-wrapper">
+				<table class="palm-list-section-label"><tr>
+				<td><div class="title">Repeat</div></td>
+				<td><div id="togAlarmRepeat" x-mojo-element="ToggleButton"></div></td>
+				</tr></table>
+			</div>
+		</div>
+		<div>
+			<table><tr>
+			<td><div id="intRepeatCount" x-mojo-element="IntegerPicker"></div></td>
+			<td><div id="intRepeatDelay" x-mojo-element="IntegerPicker"></div></td>
+			</tr></table>
+		</div>
+	</div>
+</div>

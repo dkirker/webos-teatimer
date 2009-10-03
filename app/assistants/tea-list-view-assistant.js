@@ -95,32 +95,32 @@ TeaListViewAssistant.prototype.handleCommand = function(event) {
 			break;
 			case "preset-30s":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 0.5, name: "Timer Preset"
+					time: 30, name: "Timer Preset"
 				});
 			break;
 			case "preset-1m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 1, name: "Timer Preset"
+					time: 60, name: "Timer Preset"
 				});
 			break;
 			case "preset-2m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 2, name: "Timer Preset"
+					time: 120, name: "Timer Preset"
 				});
 			break;
 			case "preset-3m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 3, name: "Timer Preset"
+					time: 180, name: "Timer Preset"
 				});
 			break;
 			case "preset-4m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 4, name: "Timer Preset"
+					time: 240, name: "Timer Preset"
 				});
 			break;
 			case "preset-5m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 5, name: "Timer Preset"
+					time: 300, name: "Timer Preset"
 				});
 			break;
 		}

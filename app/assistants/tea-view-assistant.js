@@ -68,9 +68,9 @@ TeaViewAssistant.prototype.done = function() {
 			sec = parseInt(this.timeModel.value);
 		}
 		
-		if (sec == 0) {
+		if (sec == 0 || sec > 600) {
 			Mojo.Log.info("done: Invalid Tea steep time!");
-			Mojo.Controller.errorDialog("Steep time must be greater than 0.", this.controller.window);	
+			Mojo.Controller.errorDialog("Steep time must be greater than 0 and less than 10:00.", this.controller.window);	
 			return;
 		}
 	}

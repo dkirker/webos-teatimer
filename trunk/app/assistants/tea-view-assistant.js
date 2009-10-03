@@ -33,6 +33,7 @@ function TeaViewAssistant(teas, item, edit) {
 			time: "",
 			temp: "",
 			amnt: "",
+			wvol: "",
 			note: ""
 		};
 	} else {
@@ -80,6 +81,7 @@ TeaViewAssistant.prototype.done = function() {
 		this.item.time = sec;
 		this.item.temp = this.tempModel.value;
 		this.item.amnt = this.amntModel.value;
+		this.item.wvol = this.wvolModel.value;
 		this.item.note = this.noteModel.value;
 	} else {
 		this.teas.list.push({
@@ -87,6 +89,7 @@ TeaViewAssistant.prototype.done = function() {
 			time: sec,
 			temp: this.tempModel.value,
 			amnt: this.amntModel.value,
+			wvol: this.wvolModel.value,
 			note: this.noteModel.value
 		});
 	}
@@ -174,6 +177,8 @@ TeaViewAssistant.prototype.setup = function() {
 	
 	// update labels
 	this.controller.get("lblTemp").innerHTML = "'" + Calesco.teaTempUnit;
+	this.controller.get("lblAmnt").innerHTML = Calesco.teaAmntUnit;
+	this.controller.get("lblWvol").innerHTML = Calesco.teaWvolUnit;
 	
 	/* setup widgets here */
 	this.controller.setupWidget("txtName", {
@@ -203,6 +208,11 @@ TeaViewAssistant.prototype.setup = function() {
 		modifierState: Mojo.Widget.numLock
 	}, this.amntModel = { value : this.item.amnt });
 	
+	this.controller.setupWidget("txtWvol", {
+		hintText : "Water volume...",
+		modifierState: Mojo.Widget.numLock
+	}, this.wvolModel = { value : this.item.wvol });
+	
 	this.controller.setupWidget("txtNote", {
 		hintText : "Notes...",
 		autoReplace: true,
@@ -216,6 +226,11 @@ TeaViewAssistant.prototype.setup = function() {
 TeaViewAssistant.prototype.activate = function(event) {
 	/* put in event handlers here that should only be in effect when this scene is active. For
 	   example, key handlers that are observing the document */
+	
+	// update labels
+	this.controller.get("lblTemp").innerHTML = "'" + Calesco.teaTempUnit;
+	this.controller.get("lblAmnt").innerHTML = Calesco.teaAmntUnit;
+	this.controller.get("lblWvol").innerHTML = Calesco.teaWvolUnit;
 };
 
 

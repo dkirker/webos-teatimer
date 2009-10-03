@@ -34,6 +34,8 @@ Calesco.Prefs = ({
 		if (oldPrefs) {
 			if (oldPrefs.appVersion == Calesco.appVersion) {			
 				Calesco.teaTempUnit = oldPrefs.teaTempUnit;
+				Calesco.teaAmntUnit = oldPrefs.teaAmntUnit;
+				Calesco.teaWvolUnit = oldPrefs.teaWvolUnit;
 				Calesco.timerAutostart = oldPrefs.timerAutostart;
 				Calesco.alarmRepeat = oldPrefs.alarmRepeat;
 				Calesco.alarmRepeatCount = oldPrefs.alarmRepeatCount;
@@ -46,6 +48,7 @@ Calesco.Prefs = ({
 			else {
 				// migration routines
 				switch (oldPrefs.appVersion) {
+					case "0.6.0":
 					case "0.5.1":
 					case "0.5.0":
 						Mojo.Log.info("Migrating prefs from version 0.5.0");
@@ -78,6 +81,8 @@ Calesco.Prefs = ({
 	setDefaults: function() {
 		Mojo.Log.info("Prefs.setDefaults:");
 		Calesco.teaTempUnit = 'F';
+		Calesco.teaAmntUnit = ' tsp';
+		Calesco.teaWvolUnit = 'oz';
 		Calesco.timerAutostart = 0;
 		Calesco.alarmRepeat = 1;
 		Calesco.alarmRepeatCount = 10;
@@ -93,6 +98,8 @@ Calesco.Prefs = ({
 		this.cookieData.put({
 			appVersion: Calesco.appVersion,
 			teaTempUnit: Calesco.teaTempUnit,
+			teaAmntUnit: Calesco.teaAmntUnit,
+			teaWvolUnit: Calesco.teaWvolUnit,
 			timerAutostart: Calesco.timerAutostart,
 			alarmRepeat: Calesco.alarmRepeat,
 			alarmRepeatCount: Calesco.alarmRepeatCount,

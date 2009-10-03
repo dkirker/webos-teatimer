@@ -74,7 +74,14 @@ TeaListViewAssistant.prototype.tempFormatter = function(value) {
 
 TeaListViewAssistant.prototype.amntFormatter = function(value) {
 	if (value) {
-		return "- " + value + " TSP";
+		return "- " + value + Calesco.teaAmntUnit;
+	}
+	return "";
+};
+
+TeaListViewAssistant.prototype.wvolFormatter = function(value) {
+	if (value) {
+		return "- " + value + Calesco.teaWvolUnit;
 	}
 	return "";
 };
@@ -266,6 +273,7 @@ TeaListViewAssistant.prototype.setup = function() {
 			filterFunction: this.filterTeas.bind(this),
 			formatters: { temp: this.tempFormatter.bind(this),
 						  amnt: this.amntFormatter.bind(this),
+						  wvol: this.wvolFormatter.bind(this),
 						  time: this.timeFormatter.bind(this)},
 			swipeToDelete: true
 		},
@@ -284,6 +292,7 @@ TeaListViewAssistant.prototype.setup = function() {
 			reorderable: true,
 			formatters: { temp: this.tempFormatter.bind(this),
 						  amnt: this.amntFormatter.bind(this),
+						  wvol: this.wvolFormatter.bind(this),
 						  time: this.timeFormatter.bind(this)}
 		},
 		this.teasModel = { 

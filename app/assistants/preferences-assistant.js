@@ -33,6 +33,14 @@ PreferencesAssistant.prototype.handleTeaTempUnit = function(event) {
 	Calesco.teaTempUnit = this.teaTempUnitModel.value;
 };
 
+PreferencesAssistant.prototype.handleTeaAmntUnit = function(event) {
+	Calesco.teaAmntUnit = this.teaAmntUnitModel.value;
+};
+
+PreferencesAssistant.prototype.handleTeaWvolUnit = function(event) {
+	Calesco.teaWvolUnit = this.teaWvolUnitModel.value;
+};
+
 PreferencesAssistant.prototype.selectAlarmSound = function(result) {
 	//Mojo.Log.info("selectAlarmSound: %j", result);
 	
@@ -75,6 +83,8 @@ PreferencesAssistant.prototype.handleCommand = function(event) {
 				Calesco.Prefs.store();
 				
 				this.teaTempUnitModel.value = Calesco.teaTempUnit;
+				this.teaAmntUnitModel.value = Calesco.teaAmntUnit;
+				this.teaWvolUnitModel.value = Calesco.teaWvolUnit;
 				this.timerAutostartModel.value = Calesco.timerAutostart;
 				this.alarmVibrateModel.value = Calesco.alarmVibrate;
 				this.alarmRepeatModel.value = Calesco.alarmRepeat;
@@ -83,6 +93,8 @@ PreferencesAssistant.prototype.handleCommand = function(event) {
 								
 				this.controller.get("alarmSoundName").innerHTML = Calesco.alarmSoundName;
 				this.controller.modelChanged(this.teaTempUnitModel);
+				this.controller.modelChanged(this.teaAmntUnitModel);
+				this.controller.modelChanged(this.teaWvolUnitModel);
 				this.controller.modelChanged(this.timerAutostartModel);
 				this.controller.modelChanged(this.alarmVibrateModel);
 				this.controller.modelChanged(this.alarmRepeatModel);
@@ -120,6 +132,28 @@ PreferencesAssistant.prototype.setup = function() {
 			]
 		},
 		this.teaTempUnitModel = { value : Calesco.teaTempUnit }
+	);
+	
+	this.controller.setupWidget("selAmntUnit",
+		{
+			label: "Amount",
+			choices : [ 
+				{label: "Teaspoons", value: " tsp"},
+				{label: "Grams", value: "g"}
+			]
+		},
+		this.teaAmntUnitModel = { value : Calesco.teaAmntUnit }
+	);
+	
+	this.controller.setupWidget("selWvolUnit",
+		{
+			label: "Water Volume",
+			choices : [ 
+				{label: "Ounces", value: "oz"},
+				{label: "Milliliters", value: "ml"}
+			]
+		},
+		this.teaWvolUnitModel = { value : Calesco.teaWvolUnit }
 	);
 	
 	this.controller.setupWidget("togAutostart",
@@ -176,6 +210,8 @@ PreferencesAssistant.prototype.setup = function() {
 	/* add event handlers to listen to events from widgets */
 	this.timerAutostartHandler = this.handleTimerAutostart.bind(this);
 	this.teaTempUnitHandler = this.handleTeaTempUnit.bind(this);
+	this.teaAmntUnitHandler = this.handleTeaAmntUnit.bind(this);
+	this.teaWvolUnitHandler = this.handleTeaWvolUnit.bind(this);
 	this.alarmSoundHandler = this.handleAlarmSound.bind(this);
 	this.alarmVibrateHandler = this.handleAlarmVibrate.bind(this);
 	this.alarmRepeatHandler = this.handleAlarmRepeat.bind(this);
@@ -184,6 +220,8 @@ PreferencesAssistant.prototype.setup = function() {
 	
 	this.controller.listen("togAutostart", Mojo.Event.propertyChange, this.timerAutostartHandler);
 	this.controller.listen('selTempUnit', Mojo.Event.propertyChange, this.teaTempUnitHandler);
+	this.controller.listen('selAmntUnit', Mojo.Event.propertyChange, this.teaAmntUnitHandler);
+	this.controller.listen('selWvolUnit', Mojo.Event.propertyChange, this.teaWvolUnitHandler);
 	this.controller.listen('alarmSoundRow', Mojo.Event.tap, this.alarmSoundHandler);
 	this.controller.listen('togAlarmVibrate', Mojo.Event.propertyChange, this.alarmVibrateHandler);
 	this.controller.listen('togAlarmRepeat', Mojo.Event.propertyChange, this.alarmRepeatHandler);

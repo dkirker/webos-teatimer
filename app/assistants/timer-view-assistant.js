@@ -168,6 +168,41 @@ TimerViewAssistant.prototype.considerForNotification = function(params) {
 	}
 };
 
+TimerViewAssistant.prototype.setTitleStr = function() {
+	// construct title str
+	var titleStr = this.tea_name;
+	var firstParam = 1;
+	if (this.item.temp) {
+		if (firstParam) {
+			titleStr += "<br/>";
+			firstParam = 0;
+		} else {
+			titleStr += " - ";
+		}
+		titleStr += this.item.temp + "'" + Calesco.teaTempUnit;
+	}
+	if (this.item.amnt) {
+		if (firstParam) {
+			titleStr += "<br/>";
+			firstParam = 0;
+		} else {
+			titleStr += " - ";
+		}
+		titleStr += this.item.amnt + Calesco.teaAmntUnit;	
+	}
+	if (this.item.wvol) {
+		if (firstParam) {
+			titleStr += "<br/>";
+			firstParam = 0;
+		} else {
+			titleStr += " - ";
+		}
+		titleStr += this.item.wvol + Calesco.teaWvolUnit;	
+	}
+    this.controller.get("teaName").innerHTML = titleStr;
+	
+};
+
 TimerViewAssistant.prototype.setup = function() {
 	Mojo.Log.info("TimerViewAssisant: setup");
 	
@@ -176,20 +211,9 @@ TimerViewAssistant.prototype.setup = function() {
 	/* use Mojo.View.render to render view templates and add them to the scene, if needed. */
 	this.controller.setupWidget(Mojo.Menu.appMenu, Calesco.MenuAttr, Calesco.MenuModel);
 	
-	var titleStr = this.tea_name;
-	if (this.item.temp) {
-		titleStr += " <br/> " + this.item.temp + "'" + Calesco.teaTempUnit;
-	}
-	if (this.item.amnt) {
-		if (!this.item.temp) {
-			titleStr += "<br/>" + this.item.amnt + " TSP";
-		} else {
-			titleStr += " - " + this.item.amnt + " TSP";	
-		}
-	}
-    this.controller.get("teaName").innerHTML = titleStr;
-	
 	/* setup widgets here */
+	this.setTitleStr();
+	
 	this.controller.setupWidget("btnStart",
 	{},
 	this.btnStartModel = {
@@ -222,6 +246,8 @@ TimerViewAssistant.prototype.setup = function() {
 TimerViewAssistant.prototype.activate = function(event) {
 	/* put in event handlers here that should only be in effect when this scene is active. For
 	   example, key handlers that are observing the document */
+	
+	this.setTitleStr();
 	
 	// Autostart
 	if (Calesco.timerAutostart && !this.alreadyStarted) {

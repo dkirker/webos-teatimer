@@ -31,10 +31,10 @@ function CalescoAlarm(scene, id) {
 		
 		this.mediaConnectHandler = this.mediaConnect.bind(this);
 		this.mediaDisconnectHandler = this.mediaDisconnect.bind(this);
-
+		
 		this.audioObject.addEventListener(Media.Event.X_PALM_CONNECT, this.mediaConnectHandler);
 		this.audioObject.addEventListener(Media.Event.X_PALM_DISCONNECT, this.mediaDisconnectHandler);
-		this.audioObject.addEventListener(Media.Event.X_PALM_WATCHDOG , this.mediaDisconnectHandler);
+		this.audioObject.addEventListener(Media.Event.X_PALM_WATCHDOG , this.mediaDisconnectHandler);	
 };
 	
 CalescoAlarm.prototype.cleanup = function() {
@@ -89,12 +89,12 @@ CalescoAlarm.prototype.mediaDisconnect = function(event) {
 		this.audioObject.addEventListener(Media.Event.X_PALM_DISCONNECT, this.mediaDisconnectHandler);
 		this.audioObject.addEventListener(Media.Event.X_PALM_WATCHDOG , this.mediaDisconnectHandler);
 		
-		appController = Mojo.Controller.getAppController();
-		bannerParams = {
-			messageText: "Media Disconnect",
-			icon: "../images/icon_32x32.png"
-		};
-		appController.showBanner(bannerParams, {}, "timer");
+		//appController = Mojo.Controller.getAppController();
+		//bannerParams = {
+		//	messageText: "Media Disconnect",
+		//	icon: "../images/icon_32x32.png"
+		//};
+		//appController.showBanner(bannerParams, {}, "timer");
 };
 	
 CalescoAlarm.prototype.play = function() {

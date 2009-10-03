@@ -62,8 +62,8 @@ Calesco.Prefs = ({
 					case "0.4.0":
 						Mojo.Log.info("Migrating prefs from version 0.4.0");
 						
-						Calesco.alarmRepeat = oldPrefs.alarmRepeat;
 						Calesco.alarmSoundPath = oldPrefs.alarmSoundPath;
+						Calesco.alarmSoundName = oldPrefs.alarmSoundName;
 					case "0.3.0":
 						Mojo.Log.info("Migrating prefs from version 0.3.0");
 						

@@ -257,11 +257,11 @@ TeaListViewAssistant.prototype.setup = function() {
 	this.controller.setupWidget("presets-menu", undefined, this.presetsModel = {
 		items: [
 			{ label: "30 Seconds", command: "preset-30s"},
-			{ label: "1 Minute", command: "preset-1m"},
-			{ label: "2 Minutes", command: "preset-2m"},
-			{ label: "3 Minutes", command: "preset-3m"},
-			{ label: "4 Minutes", command: "preset-4m"},
-			{ label: "5 Minutes", command: "preset-5m"}
+			{ label: "1 Minute",   command: "preset-1m"},
+			{ label: "2 Minutes",  command: "preset-2m"},
+			{ label: "3 Minutes",  command: "preset-3m"},
+			{ label: "4 Minutes",  command: "preset-4m"},
+			{ label: "5 Minutes",  command: "preset-5m"}
 		]
 	});
 		

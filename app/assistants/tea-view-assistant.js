@@ -165,7 +165,7 @@ TeaViewAssistant.prototype.sendTea = function() {
 	if (this.noteModel.value) {
 		bodyStr += "<br/><br/>Notes:<br/>" + this.noteModel.value;
 	}
-	bodyStr += "<br/><br/>Courtesy of TeaTimer for Palm WebOS"
+	bodyStr += "<br/><br/>Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform"
 	
 	this.controller.serviceRequest('palm://com.palm.applicationManager', {
 		method: "open",

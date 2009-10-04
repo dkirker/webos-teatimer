@@ -147,13 +147,50 @@ TeaViewAssistant.prototype.checkTimeChars = function(keyCode) {
 	return false;
 }
 
+TeaViewAssistant.prototype.sendTea = function() {
+	Mojo.Log.info("sendTea:");
+	
+	var subjStr = this.nameModel.value;
+	var bodyStr = this.nameModel.value;
+	bodyStr += "<br/>Steep time: " + this.timeModel.value;
+	if (this.amntModel.value) {
+		bodyStr += "<br/>Amount of tea: " + this.amntModel.value + Calesco.teaAmntUnit;
+	}
+	if (this.tempModel.value) {
+		bodyStr += "<br/>Water temperature: " + this.tempModel.value + "'" + Calesco.teaTempUnit;
+	}
+	if (this.wvolModel.value) {
+		bodyStr += "<br/>Water volume: " + this.wvolModel.value + Calesco.teaWvolUnit;
+	}
+	if (this.noteModel.value) {
+		bodyStr += "<br/><br/>Notes:<br/>" + this.noteModel.value;
+	}
+	bodyStr += "<br/><br/>Courtesy of TeaTimer for Palm WebOS"
+	
+	this.controller.serviceRequest('palm://com.palm.applicationManager', {
+		method: "open",
+		parameters: {
+			id: 'com.palm.app.email',
+			params: {
+				summary: subjStr,
+				text: bodyStr
+			}
+		}
+	});
+}
+
+
 TeaViewAssistant.prototype.handleCommand = function(event) {
 	if(event.type == Mojo.Event.command) {
 		switch(event.command) {
 			case "do-Done":
 				Mojo.Log.info("do-Done");
 				this.done();
-			break;
+				break;
+			case "do-Send":
+				Mojo.Log.info("do-Send");
+				this.sendTea();
+				break;
 		}
 	}
 };
@@ -173,6 +210,16 @@ TeaViewAssistant.prototype.setup = function() {
 			}]
 		}]
 	};
+	if (this.edit) {
+		this.cmdMenuModel.items[1] = {};
+		this.cmdMenuModel.items[2] = {
+			items: [{
+				disabled: false,
+				icon: "send",
+				command: "do-Send"
+			}]
+		};
+	}
 	this.controller.setupWidget(Mojo.Menu.commandMenu, undefined, this.cmdMenuModel);
 	
 	// update labels

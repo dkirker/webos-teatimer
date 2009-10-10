@@ -59,7 +59,7 @@ TimerViewAssistant.prototype.updateTimerView = function(seconds) {
 };
 
 TimerViewAssistant.prototype.setViewActive = function () {
-	this.btnStartModel.label = "Stop";	
+	this.btnStartModel.label = $L("Stop");	
 	this.btnStartModel.buttonClass = "negative";
 	this.controller.modelChanged(this.btnStartModel);
 	this.btnResetModel.disabled = true;
@@ -67,7 +67,7 @@ TimerViewAssistant.prototype.setViewActive = function () {
 };
 
 TimerViewAssistant.prototype.setViewInactive = function () {
-	this.btnStartModel.label = "Start";	
+	this.btnStartModel.label = $L("Start");	
 	this.btnStartModel.buttonClass = "affirmative";
 	this.controller.modelChanged(this.btnStartModel);
 	this.btnResetModel.disabled = false;
@@ -82,7 +82,7 @@ TimerViewAssistant.prototype.timeup = function() {
 		appController = Mojo.Controller.getAppController();
 		
 		bannerParams = {
-			messageText: "Your tea is ready",
+			messageText: $L("Your tea is ready"),
 			icon: "../images/icon_32x32.png"
 		};
 		appController.showBanner(bannerParams, {}, "timer");
@@ -113,9 +113,9 @@ TimerViewAssistant.prototype.timeup = function() {
 		Mojo.Log.info("Timeup: Show Alert Dialog");
 		this.controller.showAlertDialog({
 			onChoose: this.stopAlarm.bind(this),
-			title : "Tea Timer",
-			message: "Your tea is ready.",
-			choices: [{label: "OK"}]
+			title : $L("Tea Timer"),
+			message: $L("Your tea is ready."),
+			choices: [{label: $L("OK")}]
 		});
 	}
 
@@ -214,17 +214,18 @@ TimerViewAssistant.prototype.setup = function() {
 	/* setup widgets here */
 	this.setTitleStr();
 	
+	this.controller.get("grouplabel-timer").innerHTML = $L("Time Remaining");
 	this.controller.setupWidget("btnStart",
 	{},
 	this.btnStartModel = {
-		label : "Start",
+		label : $L("Start"),
 		buttonClass: "affirmative", 
 		disabled : false
 	});
 	this.controller.setupWidget("btnReset",
 	{},
 	this.btnResetModel = {
-		label : "Reset",
+		label : $L("Reset"),
 		disabled : false
 	});
 	

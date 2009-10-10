@@ -40,8 +40,8 @@ Calesco.MenuModel = {
 	items: [
 	//	{label: "Erase all data", command: "do-Erase"},
 		Mojo.Menu.editItem,
-		{label: "Preferences", command: "do-Preferences"},
-		{label: "Help", command: "do-Help"}
+		{label: $L("Preferences"), command: "do-Preferences"},
+		{label: $L("Help"), command: "do-Help"}
 	]
 };
 

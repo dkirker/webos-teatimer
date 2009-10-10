@@ -46,20 +46,20 @@ TeaViewAssistant.prototype.done = function() {
 	
 	if (this.nameModel.value === "") {
 		Mojo.Log.info("done: Invalid Tea name!");
-		Mojo.Controller.errorDialog("Tea name required!", this.controller.window);
+		Mojo.Controller.errorDialog($L("Tea name required!"), this.controller.window);
 		return;
 	}
 	
 	var sec;
 	if (this.timeModel.value === "") {
 		Mojo.Log.info("done: Invalid Tea steep time!");
-		Mojo.Controller.errorDialog("Steep time is required and must be less than 15 minutes.", this.controller.window);	
+		Mojo.Controller.errorDialog($L("Steep time is required and must be less than 10:00."), this.controller.window);	
 		return;
 	} else {
 		if (this.timeModel.value.search(/:[0-9]$/) >= 0 ||
 			this.timeModel.value.search(/:$/) >= 0) {
 			Mojo.Log.info("done: Invalid Tea steep time format!");
-			Mojo.Controller.errorDialog("Invalid time format.", this.controller.window);	
+			Mojo.Controller.errorDialog($L("Invalid time format."), this.controller.window);	
 			return;
 		}
 		
@@ -71,7 +71,7 @@ TeaViewAssistant.prototype.done = function() {
 		
 		if (sec == 0 || sec > 600) {
 			Mojo.Log.info("done: Invalid Tea steep time!");
-			Mojo.Controller.errorDialog("Steep time must be greater than 0 and less than 10:00.", this.controller.window);	
+			Mojo.Controller.errorDialog($L("Steep time must be greater than 0 and less than 10:00."), this.controller.window);	
 			return;
 		}
 	}
@@ -150,6 +150,7 @@ TeaViewAssistant.prototype.checkTimeChars = function(keyCode) {
 TeaViewAssistant.prototype.sendTea = function() {
 	Mojo.Log.info("sendTea:");
 	
+	// FIXME: I10L 
 	var subjStr = this.nameModel.value;
 	var bodyStr = this.nameModel.value;
 	bodyStr += "<br/>Steep time: " + this.timeModel.value;
@@ -205,7 +206,7 @@ TeaViewAssistant.prototype.setup = function() {
 		items: [{
 			items: [{
 				disabled: false,
-				label: "Done",
+				label: $L("Done"),
 				command: "do-Done"
 			}]
 		}]
@@ -229,7 +230,7 @@ TeaViewAssistant.prototype.setup = function() {
 	
 	/* setup widgets here */
 	this.controller.setupWidget("txtName", {
-		hintText : "Name...",
+		hintText : $L("Name..."),
 		autoFocus: true,
 		autoReplace: true
 	}, this.nameModel = { value : this.item.name });
@@ -239,36 +240,45 @@ TeaViewAssistant.prototype.setup = function() {
 		secstr = sec2str(this.item.time);
 	}
 	this.controller.setupWidget("txtTime", {
-		hintText : "Time (10:00 Max)...",
+		hintText : $L("Time (10:00 Max)..."),
 		charsAllow: this.checkTimeChars.bind(this),
 		maxLength: 5,
+		focusMode: Mojo.Widget.focusAppendMode,
 		modifierState: Mojo.Widget.numLock
 	}, this.timeModel = { value : secstr });
 	
 	this.controller.setupWidget("txtTemp", {
-		hintText : "Temp...",
+		hintText : $L("Temp..."),
 		modifierState: Mojo.Widget.numLock
 	}, this.tempModel = { value : this.item.temp });
 	
 	this.controller.setupWidget("txtAmnt", {
-		hintText : "Amount...",
+		hintText : $L("Amount..."),
 		modifierState: Mojo.Widget.numLock
 	}, this.amntModel = { value : this.item.amnt });
 	
 	this.controller.setupWidget("txtWvol", {
-		hintText : "Water volume...",
+		hintText : $L("Water volume..."),
 		modifierState: Mojo.Widget.numLock
 	}, this.wvolModel = { value : this.item.wvol });
 	
 	this.controller.setupWidget("txtNote", {
-		hintText : "Notes...",
+		hintText : $L("Notes..."),
 		autoReplace: true,
 		enterSubmits: false,
 		multiline: true
 	}, this.noteModel = { value : this.item.note });
 		
 	/* add event handlers to listen to events from widgets */
+//	this.pasteHandler = this.namePaste.bind(this);
+//	this.controller.get("txtName").addEventListener("paste", this.pasteHandler, false);
 };
+
+TeaViewAssistant.prototype.namePaste = function(event) {
+	Mojo.Log.info("namePaste: %j", event);
+	Mojo.Log.info("namePaste:", event.clipboardData.getData('text'));
+	//event.preventDefault();
+}
 
 TeaViewAssistant.prototype.activate = function(event) {
 	/* put in event handlers here that should only be in effect when this scene is active. For
@@ -289,4 +299,6 @@ TeaViewAssistant.prototype.deactivate = function(event) {
 TeaViewAssistant.prototype.cleanup = function(event) {
 	/* this function should do any cleanup needed before the scene is destroyed as 
 	   a result of being popped off the scene stack */
+	
+//	this.controller.get("txtName").removeEventListener("paste", this.pasteHandler, false);
 };

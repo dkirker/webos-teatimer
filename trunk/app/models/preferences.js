@@ -84,6 +84,7 @@ Calesco.Prefs = ({
 	},
 	
 	setDefaults: function() {
+		// FIXME: I10L
 		Mojo.Log.info("Prefs.setDefaults:");
 		Calesco.teaTempUnit = 'F';
 		Calesco.teaAmntUnit = ' tsp';

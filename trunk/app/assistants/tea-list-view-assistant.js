@@ -102,32 +102,32 @@ TeaListViewAssistant.prototype.handleCommand = function(event) {
 			break;
 			case "preset-30s":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 30, name: "Timer Preset"
+					time: 30, name: $L("Timer Preset")
 				});
 			break;
 			case "preset-1m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 60, name: "Timer Preset"
+					time: 60, name: $L("Timer Preset")
 				});
 			break;
 			case "preset-2m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 120, name: "Timer Preset"
+					time: 120, name: $L("Timer Preset")
 				});
 			break;
 			case "preset-3m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 180, name: "Timer Preset"
+					time: 180, name: $L("Timer Preset")
 				});
 			break;
 			case "preset-4m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 240, name: "Timer Preset"
+					time: 240, name: $L("Timer Preset")
 				});
 			break;
 			case "preset-5m":
 				this.controller.stageController.pushScene("timer-view", false, false, {
-					time: 300, name: "Timer Preset"
+					time: 300, name: $L("Timer Preset")
 				});
 			break;
 		}
@@ -248,7 +248,7 @@ TeaListViewAssistant.prototype.setup = function() {
 		},{},{
 			items: [{
 				disabled: false,
-				label: "Presets",
+				label: $L("Presets"),
 				submenu: "presets-menu"
 			}]
 		}]
@@ -256,12 +256,12 @@ TeaListViewAssistant.prototype.setup = function() {
 	this.controller.setupWidget(Mojo.Menu.commandMenu, undefined, this.cmdMenuModel);
 	this.controller.setupWidget("presets-menu", undefined, this.presetsModel = {
 		items: [
-			{ label: "30 Seconds", command: "preset-30s"},
-			{ label: "1 Minute",   command: "preset-1m"},
-			{ label: "2 Minutes",  command: "preset-2m"},
-			{ label: "3 Minutes",  command: "preset-3m"},
-			{ label: "4 Minutes",  command: "preset-4m"},
-			{ label: "5 Minutes",  command: "preset-5m"}
+			{ label: $L("30 Seconds"), command: "preset-30s"},
+			{ label: $L("1 Minute"),   command: "preset-1m"},
+			{ label: $L("2 Minutes"),  command: "preset-2m"},
+			{ label: $L("3 Minutes"),  command: "preset-3m"},
+			{ label: $L("4 Minutes"),  command: "preset-4m"},
+			{ label: $L("5 Minutes"),  command: "preset-5m"}
 		]
 	});
 		

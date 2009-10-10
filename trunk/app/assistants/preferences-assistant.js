@@ -112,8 +112,8 @@ PreferencesAssistant.prototype.setup = function() {
 		visible : true,
 		items: [
 			Mojo.Menu.editItem,
-			{label: "Restore Defaults", command: "do-Defaults"},
-			{label: "Help", command: "do-Help"}
+			{label: $L("Restore Defaults"), command: "do-Defaults"},
+			{label: $L("Help"), command: "do-Help"}
 		]
 	};
 
@@ -125,10 +125,10 @@ PreferencesAssistant.prototype.setup = function() {
 	/* setup widgets here */
 	this.controller.setupWidget("selTempUnit",
 		{
-			label: "Temperature",
+			label: $L("Temperature"),
 			choices : [ 
-				{label: "Fahrenheit", value: "F"},
-				{label: "Celcius", value: "C"}
+				{label: $L("Fahrenheit"), value: "F"},
+				{label: $L("Celcius"), value: "C"}
 			]
 		},
 		this.teaTempUnitModel = { value : Calesco.teaTempUnit }
@@ -136,10 +136,10 @@ PreferencesAssistant.prototype.setup = function() {
 	
 	this.controller.setupWidget("selAmntUnit",
 		{
-			label: "Amount",
+			label: $L("Amount"),
 			choices : [ 
-				{label: "Teaspoons", value: " tsp"},
-				{label: "Grams", value: "g"}
+				{label: $L("Teaspoons"), value: " tsp"},
+				{label: $L("Grams"), value: "g"}
 			]
 		},
 		this.teaAmntUnitModel = { value : Calesco.teaAmntUnit }
@@ -147,10 +147,10 @@ PreferencesAssistant.prototype.setup = function() {
 	
 	this.controller.setupWidget("selWvolUnit",
 		{
-			label: "Water Volume",
+			label: $L("Water Volume"),
 			choices : [ 
-				{label: "Ounces", value: "oz"},
-				{label: "Milliliters", value: "ml"}
+				{label: $L("Ounces"), value: "oz"},
+				{label: $L("Milliliters"), value: "ml"}
 			]
 		},
 		this.teaWvolUnitModel = { value : Calesco.teaWvolUnit }
@@ -191,16 +191,17 @@ PreferencesAssistant.prototype.setup = function() {
 	
 	this.controller.setupWidget("intRepeatCount",
 		{
-			label: "Count",
+			label: $L("Count"),
 			min: 1,
-			max: 20
+			max: 20,
+			autoFocus: false
 		},
 		this.alarmRepeatCountModel = { value: Calesco.alarmRepeatCount }
 	);
 	
 	this.controller.setupWidget("intRepeatDelay",
 		{
-			label: "Delay (s)",
+			label: $L("Delay (s)"),
 			min: 0,
 			max: 60
 		},

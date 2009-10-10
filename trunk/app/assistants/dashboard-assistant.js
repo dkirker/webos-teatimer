@@ -48,6 +48,7 @@ DashboardAssistant.prototype.displayDashboard = function(name, date) {
 	}
 	if (min < 10) {	c += "0"; }
 	
+	// FIXME: I10L 
 	var title = "Your tea was ready at " + hrs + c + min + " " + m;
 	var msg = "";
 //	if (name != "Timer Preset") {

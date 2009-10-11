@@ -153,20 +153,20 @@ TeaViewAssistant.prototype.sendTea = function() {
 	// FIXME: I10L 
 	var subjStr = this.nameModel.value;
 	var bodyStr = this.nameModel.value;
-	bodyStr += "<br/>Steep time: " + this.timeModel.value;
+	bodyStr += "<br/>" + $L("Steep time: ") + this.timeModel.value;
 	if (this.amntModel.value) {
-		bodyStr += "<br/>Amount of tea: " + this.amntModel.value + Calesco.teaAmntUnit;
+		bodyStr += "<br/>" + $L("Amount of tea: ") + this.amntModel.value + Calesco.teaAmntUnit;
 	}
 	if (this.tempModel.value) {
-		bodyStr += "<br/>Water temperature: " + this.tempModel.value + "'" + Calesco.teaTempUnit;
+		bodyStr += "<br/>" + $L("Water temperature: ") + this.tempModel.value + "'" + Calesco.teaTempUnit;
 	}
 	if (this.wvolModel.value) {
-		bodyStr += "<br/>Water volume: " + this.wvolModel.value + Calesco.teaWvolUnit;
+		bodyStr += "<br/>" + $L("Water volume: ") + this.wvolModel.value + Calesco.teaWvolUnit;
 	}
 	if (this.noteModel.value) {
-		bodyStr += "<br/><br/>Notes:<br/>" + this.noteModel.value;
+		bodyStr += "<br/><br/>" + $L("Notes:") + "<br/>" + this.noteModel.value;
 	}
-	bodyStr += "<br/><br/>Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform"
+	bodyStr += "<br/><br/>" + $L("Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform");
 	
 	this.controller.serviceRequest('palm://com.palm.applicationManager', {
 		method: "open",

@@ -38,22 +38,24 @@ DashboardAssistant.prototype.updateDashboard = function(name, date) {
 DashboardAssistant.prototype.displayDashboard = function(name, date) {
 	Mojo.Log.info("displayDashboard:");
 	
+	var timestr = "";
 	var hrs = this.date.getHours();
 	var min = this.date.getMinutes();
-	var m = "am";
-	var c = ":";
-	if (hrs > 12) {
-		hrs -= 12;
-		m = "pm";
-	}
 	if (min < 10) {	c += "0"; }
 	
-	// FIXME: I10L 
-	var title = "Your tea was ready at " + hrs + c + min + " " + m;
+	if (Mojo.Format.using12HrTime()) {
+		var m = "am";
+		if (hrs > 12) {
+			hrs -= 12;
+			m = "pm";
+		}
+		timestr = hrs + ":" + min + " " + m;
+	} else {
+		timestr = hrs + ":" + min;
+	}
+		
+	var title = $L("Your tea was ready at #{time}.").interpolate({time: timestr});
 	var msg = "";
-//	if (name != "Timer Preset") {
-//		msg += this.name;
-//	}
 	
 	var info = { title: title, message: msg};
 	var renderedInfo = Mojo.View.render({

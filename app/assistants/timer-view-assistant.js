@@ -82,7 +82,7 @@ TimerViewAssistant.prototype.timeup = function() {
 		appController = Mojo.Controller.getAppController();
 		
 		bannerParams = {
-			messageText: $L("Your tea is ready"),
+			messageText: $L("Your tea is ready."),
 			icon: "../images/icon_32x32.png"
 		};
 		appController.showBanner(bannerParams, {}, "timer");

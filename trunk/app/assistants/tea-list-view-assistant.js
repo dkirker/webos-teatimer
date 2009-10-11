@@ -253,6 +253,9 @@ TeaListViewAssistant.prototype.setup = function() {
 			}]
 		}]
 	};
+	
+	this.controller.get("headerlabel").innerHTML = $L("Tea List");
+	
 	this.controller.setupWidget(Mojo.Menu.commandMenu, undefined, this.cmdMenuModel);
 	this.controller.setupWidget("presets-menu", undefined, this.presetsModel = {
 		items: [

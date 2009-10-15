@@ -248,7 +248,7 @@ TeaViewAssistant.prototype.setup = function() {
 	}, this.timeModel = { value : secstr });
 	
 	this.controller.setupWidget("txtTemp", {
-		hintText : $L("Temp..."),
+		hintText : $L("Water temperature..."),
 		modifierState: Mojo.Widget.numLock
 	}, this.tempModel = { value : this.item.temp });
 	

@@ -86,9 +86,19 @@ Calesco.Prefs = ({
 	setDefaults: function() {
 		// FIXME: I10L
 		Mojo.Log.info("Prefs.setDefaults:");
-		Calesco.teaTempUnit = 'F';
-		Calesco.teaAmntUnit = ' tsp';
-		Calesco.teaWvolUnit = 'oz';
+		var loc = Mojo.Locale.getCurrentLocale();
+		Mojo.Log.info(loc);
+		if (loc.substr(3,2) == "us") {
+			Mojo.Log.info("Prefs.setDefaults: Standard measure in US");
+			Calesco.teaTempUnit = 'F';
+			Calesco.teaAmntUnit = ' tsp';
+			Calesco.teaWvolUnit = 'oz';
+		} else {
+			Mojo.Log.info("Prefs.setDefaults: Metric everywhere else");
+			Calesco.teaTempUnit = 'C';
+			Calesco.teaAmntUnit = 'g';
+			Calesco.teaWvolUnit = 'ml';
+		}
 		Calesco.timerAutostart = 0;
 		Calesco.alarmRepeat = 1;
 		Calesco.alarmRepeatCount = 10;

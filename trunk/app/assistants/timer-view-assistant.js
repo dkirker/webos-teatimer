@@ -94,8 +94,9 @@ TimerViewAssistant.prototype.timeup = function() {
 			Mojo.Log.info("Timeup: New dashboard stage");
 			
 			name = this.tea_name;
+			var stopAlarmHandler = this.stopAlarm.bind(this);
 			var pushDashboard = function (stageController) {
-				stageController.pushScene("dashboard", name, new Date());
+				stageController.pushScene("dashboard", name, new Date(), stopAlarmHandler);
 			};
 			appController.createStageWithCallback({
 				name: Calesco.dashboardStageName,
@@ -106,7 +107,7 @@ TimerViewAssistant.prototype.timeup = function() {
 			Mojo.Log.info("Timeup: dashboard created!");
 		} else {
 			Mojo.Log.info("Timeup: Existing dashboard");
-			dashboardStageController.delegateToSceneAssistant("updateDashboard", this.tea_name, new Date());
+			dashboardStageController.delegateToSceneAssistant("updateDashboard", this.tea_name, new Date(), this.stopAlarm.bind(this));
 		}
 	} else {
 		// Show Alert Dialog
@@ -143,7 +144,7 @@ TimerViewAssistant.prototype.handleInterval = function () {
 	}
 };
 
-TimerViewAssistant.prototype.handleBtnReset = function(){
+TimerViewAssistant.prototype.handleBtnReset = function() {
 	this.resetTimer();
 	this.updateTimerView(this.timer_seconds);
 };

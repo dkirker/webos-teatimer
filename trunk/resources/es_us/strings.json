@@ -5,8 +5,9 @@
 	"3 Minutes" : "3 Minutos",
 	"4 Minutes" : "4 Minutos",
 	"5 Minutes" : "5 Minutos",
-	"Amount..." : "Amount...",
-	"Amount" : "Amount",
+	"Amount..." : "Cantidad...",
+	"Amount" : "Cantidad",
+	"Amount of tea: " : "Cantidad de té: ",
 	"Celcius" : "Celcius",
 	"Count" : "Conde",
 	"Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform" : "Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform",
@@ -18,33 +19,46 @@
 	"Help" : "Ayuda",
 	"Invalid time format." : "Invalid time format.",
 	"Milliliters" : "Mililitros",
-	"Name..." : "Name...",
-	"Notes:" : "Notes:",
-	"Notes..." : "Notes...",
+	"Name..." : "Nombre...",
+	"Notes:" : "Notas:",
+	"Notes..." : "Notas...",
 	"OK" : "OK",
-	"Ounces" : "Ounces",
+	"Ounces" : "Onza",
 	"Preferences" : "Preferencias",
-	"Presets" : "Presets",
-	"Reset" : "Reset",
+	"Presets" : "Predefinido",
+	"Reset" : "Reajustar",
 	"Restore Defaults" : "Restaurar los valores predeterminados",
 	"Start" : "Iniciar",
 	"Steep time is required and must be less than 10:00." : "Steep time is required and must be less than 10:00.",
 	"Steep time must be greater than 0 and less than 10:00." : "Steep time must be greater than 0 and less than 10:00.",
-	"Steep time: " : "Steep time: ",
+	"Steep time: " : "Remojar tiempo: ",
 	"Stop" : "Parar",
 	"Tea List" : "Lista de té",
 	"Tea name required!" : "Tea name required!",
 	"Teaspoons" : "Cucharaditas",
 	"Tea Timer" : "Temporizador de té",
 	"Temperature" : "Temperatura",
-	"Temp..." : "Temp...",
-	"Time (10:00 Max)..." : "Time (10:00 Max)...",
+	"Time (10:00 Max)..." : "Tiempo (10:00 Máx)...",
 	"Time Remaining" : "Tiempo restante",
-	"Timer Preset" : "Timer Preset",
-	"Water temperature: " : "Water temperature: ",
-	"Water volume: " : "Water volume: ",
-	"Water volume..." : "Water volume...",
-	"Water Volume" : "Water Volume",
+	"Timer Preset" : "Temporizador predefinido",
+	"Water temperature: " : "Temperatura del agua: ",
+	"Water temperature..." : "Temperatura del agua...",
+	"Water volume: " : "Volumen de agua: ",
+	"Water volume..." : "Volumen de agua...",
+	"Water Volume" : "Volumen do agua",
 	"Your tea is ready." : "Su té está listo.",
 	"Your tea was ready at #{time}." : "El té estaba listo a las #{time}."
 }
+
+/* HTML Extras
+  
+  Preferences : Preferencias
+  Tea settings : Configuración de té
+  Timer settings : Configuración de temporizador
+  Autostart : Inicio automático
+  Alarm settings : Configuración de alarma
+  Vibrate : Vibrar
+  Sound : Sonido
+  Repeat : Repetir
+
+*/

@@ -86,10 +86,8 @@ Calesco.Prefs = ({
 	setDefaults: function() {
 		// FIXME: I10L
 		Mojo.Log.info("Prefs.setDefaults:");
-		var loc = Mojo.Locale.getCurrentLocale();
-		Mojo.Log.info(loc);
-		if (loc.substr(3,2) == "us") {
-			Mojo.Log.info("Prefs.setDefaults: Standard measure in US");
+		if (isUSRegion()) {
+			Mojo.Log.info("Prefs.setDefaults: Standard units in US");
 			Calesco.teaTempUnit = 'F';
 			Calesco.teaAmntUnit = ' tsp';
 			Calesco.teaWvolUnit = 'oz';

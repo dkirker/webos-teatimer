@@ -36,3 +36,12 @@ function str2sec(str) {
 	//Mojo.Log.info(">", sec)
 	return sec;
 }
+
+function isUSRegion() {
+	Mojo.Log.info("isUSRegion:");
+	var loc = Mojo.Locale.getCurrentLocale();
+	if (loc.substr(3,2) == "us") {
+		return true;
+	}
+	return false;
+}

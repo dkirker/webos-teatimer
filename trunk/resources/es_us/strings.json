@@ -8,7 +8,7 @@
 	"Amount..." : "Cantidad...",
 	"Amount" : "Cantidad",
 	"Amount of tea: " : "Cantidad de té: ",
-	"Celcius" : "Celcius",
+	"Celcius" : "Centígrados",
 	"Count" : "Conde",
 	"Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform" : "Courtesy of TeaTimer for the Palm&reg; webOS&trade; platform",
 	"Default" : "Predeterminado",
@@ -28,11 +28,14 @@
 	"Presets" : "Predefinido",
 	"Reset" : "Reajustar",
 	"Restore Defaults" : "Restaurar los valores predeterminados",
+	"Send Email" : "Enviar Email",
 	"Start" : "Iniciar",
 	"Steep time is required and must be less than 10:00." : "Steep time is required and must be less than 10:00.",
 	"Steep time must be greater than 0 and less than 10:00." : "Steep time must be greater than 0 and less than 10:00.",
 	"Steep time: " : "Remojar tiempo: ",
 	"Stop" : "Parar",
+	"Support" : "Soporte",
+	"Support Website" : "Sitio Web de Soporte",
 	"Tea List" : "Lista de té",
 	"Tea name required!" : "Tea name required!",
 	"Teaspoons" : "Cucharaditas",
@@ -49,16 +52,3 @@
 	"Your tea is ready." : "Su té está listo.",
 	"Your tea was ready at #{time}." : "El té estaba listo a las #{time}."
 }
-
-/* HTML Extras
-  
-  Preferences : Preferencias
-  Tea settings : Configuración de té
-  Timer settings : Configuración de temporizador
-  Autostart : Inicio automático
-  Alarm settings : Configuración de alarma
-  Vibrate : Vibrar
-  Sound : Sonido
-  Repeat : Repetir
-
-*/

@@ -84,7 +84,6 @@ Calesco.Prefs = ({
 	},
 	
 	setDefaults: function() {
-		// FIXME: I10L
 		Mojo.Log.info("Prefs.setDefaults:");
 		if (isUSRegion()) {
 			Mojo.Log.info("Prefs.setDefaults: Standard units in US");

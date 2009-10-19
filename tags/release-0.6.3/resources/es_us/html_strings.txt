@@ -1,0 +1,11 @@
+HTML Extras
+  
+Preferences : Preferencias
+Tea settings : Configuración de té
+Timer settings : Configuración de temporizador
+Autostart : Inicio automático
+Alarm settings : Configuración de alarma
+Vibrate : Vibrar
+Sound : Sonido
+Repeat : Repetir
+

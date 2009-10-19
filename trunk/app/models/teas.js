@@ -27,17 +27,17 @@ var Teas = Class.create ({
 		var returnList = [];
 		
 		if (isUSRegion()) {
-			returnList[0] = { name: "Black",   time: 300, temp: 212 };
-			returnList[1] = { name: "Oolong",  time: 360, temp: 190 };
-			returnList[2] = { name: "White",   time: 240, temp: 180 };
-			returnList[3] = { name: "Green",   time: 180, temp: 160 };
-			returnList[4] = { name: "Rooibos", time: 300, temp: 212 };
+			returnList[0] = { name: $L("Black"),   time: 300, temp: 212 };
+			returnList[1] = { name: $L("Oolong"),  time: 360, temp: 190 };
+			returnList[2] = { name: $L("White"),   time: 240, temp: 180 };
+			returnList[3] = { name: $L("Green"),   time: 180, temp: 160 };
+			returnList[4] = { name: $L("Rooibos"), time: 300, temp: 212 };
 		} else {
-			returnList[0] = { name: "Black",   time: 300, temp: 100 };
-			returnList[1] = { name: "Oolong",  time: 360, temp: 90  };
-			returnList[2] = { name: "White",   time: 240, temp: 80  };
-			returnList[3] = { name: "Green",   time: 180, temp: 70  };
-			returnList[4] = { name: "Rooibos", time: 300, temp: 100 };
+			returnList[0] = { name: $L("Black"),   time: 300, temp: 100 };
+			returnList[1] = { name: $L("Oolong"),  time: 360, temp: 90  };
+			returnList[2] = { name: $L("White"),   time: 240, temp: 80  };
+			returnList[3] = { name: $L("Green"),   time: 180, temp: 70  };
+			returnList[4] = { name: $L("Rooibos"), time: 300, temp: 100 };
 		}
 		return returnList;
 	},

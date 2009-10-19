@@ -162,12 +162,12 @@ TimerViewAssistant.prototype.handleBtnStart = function () {
 	}
 };
 
-TimerViewAssistant.prototype.considerForNotification = function(params) {
-	Mojo.Log.info("considerForNotification:");
-	if (params && params.action == "stop-alarm") {
-		this.stopAlarm();
-	}
-};
+//TimerViewAssistant.prototype.considerForNotification = function(params) {
+//	Mojo.Log.info("considerForNotification:");
+//	if (params && params.action == "stop-alarm") {
+//		this.stopAlarm();
+//	}
+//};
 
 TimerViewAssistant.prototype.setTitleStr = function() {
 	// construct title str

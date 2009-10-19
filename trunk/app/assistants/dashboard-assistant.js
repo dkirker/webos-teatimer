@@ -115,7 +115,10 @@ DashboardAssistant.prototype.cleanup = function(event) {
 	//Mojo.Controller.getAppController().sendToNotificationChain({
 	//	action: "stop-alarm"
 	//});
-	this.stopAlarm();
+	var ac = Mojo.Controller.getAppController();
+	if (ac.getStageController(Calesco.mainStageName)) {
+		this.stopAlarm();
+	}
     
 	// Cleanup event listeners
 	this.controller.stopListening("dashboardinfo", Mojo.Event.tap, this.switchHandler);

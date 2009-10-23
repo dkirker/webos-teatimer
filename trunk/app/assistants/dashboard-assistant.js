@@ -42,7 +42,7 @@ DashboardAssistant.prototype.displayDashboard = function(name, date) {
 	var timestr = "";
 	var hrs = this.date.getHours();
 	var min = this.date.getMinutes();
-	if (min < 10) {	c += "0"; }
+	if (min < 10) {	min = "0" + min; }
 	
 	if (Mojo.Format.using12HrTime()) {
 		var m = "am";

@@ -56,14 +56,14 @@ TeaListViewAssistant.prototype.handleLstTeaReorder = function(event){
 	this.teas.storeDB();
 };
 
-TeaListViewAssistant.prototype.considerForNotification = function(params) {
-	Mojo.Log.info("considerForNotification:");
-	if (params && params.action == "update-tea-list") {
-		Mojo.Log.info("considerForNotification: database load update %j", this.teas.list);
-		this.teasModel.items = this.teas.list;
-		this.controller.modelChanged(this.teasModel);
-	}
-};
+//TeaListViewAssistant.prototype.considerForNotification = function(params) {
+//	Mojo.Log.info("considerForNotification:");
+//	if (params && params.action == "update-tea-list") {
+//		Mojo.Log.info("considerForNotification: database load update %j", this.teas.list);
+//		this.teasModel.items = this.teas.list;
+//		this.controller.modelChanged(this.teasModel);
+//	}
+//};
 
 TeaListViewAssistant.prototype.tempFormatter = function(value) {
 	if (value) {
@@ -316,6 +316,17 @@ TeaListViewAssistant.prototype.setup = function() {
 	this.controller.listen('lstTea', Mojo.Event.listTap, this.lstTapHandler);
 	this.controller.listen('lstTea', Mojo.Event.listDelete, this.lstDeleteHandler);
 	this.controller.listen('lstTea', Mojo.Event.listReorder, this.lstReorderHandler);
+	
+	this.timer = this.controller.window.setInterval(this.handleInterval.bind(this), 500);
+};
+
+TeaListViewAssistant.prototype.handleInterval = function() {
+	if (this.teas.loaded) {
+		Mojo.Log.info("handleInterval: database load update %j", this.teas.list);
+		this.teasModel.items = this.teas.list;
+		this.controller.modelChanged(this.teasModel);
+		this.controller.window.clearInterval(this.timer);
+	}
 };
 
 TeaListViewAssistant.prototype.activate = function(event) {
@@ -323,7 +334,6 @@ TeaListViewAssistant.prototype.activate = function(event) {
 	   example, key handlers that are observing the document */
  	this.controller.modelChanged(this.teasModel);
 };
-
 
 TeaListViewAssistant.prototype.deactivate = function(event) {
 	/* remove any event handlers you added in activate and do any other cleanup that should happen before

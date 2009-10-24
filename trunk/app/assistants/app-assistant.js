@@ -55,7 +55,7 @@ AppAssistant.prototype.setup = function() {
 	Calesco.Prefs.initialize();
 	
 	this.teas = new Teas(); 
-	this.teas.loadDB();
+	this.teas.loadDB(); 
 };
 
 AppAssistant.prototype.handleLaunch = function(params){

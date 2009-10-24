@@ -20,6 +20,7 @@
 
 var Teas = Class.create ({
 	initialize: function() {
+		this.loaded = false;
 		this.list = []; //this.getDefaultList();
 	},
 	
@@ -124,10 +125,12 @@ var Teas = Class.create ({
 			}
 				
 			Mojo.Log.info("getDBSuccess: data loaded!");
-			Mojo.Controller.getAppController().sendToNotificationChain({
-				action: "update-tea-list"
-			});
-			Mojo.Log.info("getDBSuccess: Notification sent");
+			this.loaded = true;
+			
+			//Mojo.Controller.getAppController().sendToNotificationChain({
+			//	action: "update-tea-list"
+			//});
+			//Mojo.Log.info("getDBSuccess: Notification sent");
 		}	
 	},
 	
@@ -135,10 +138,12 @@ var Teas = Class.create ({
 		Mojo.Log.warn("useDefaultDB:");
 		
 		this.list = this.getDefaultList();
-		Mojo.Controller.getAppController().sendToNotificationChain({
-			type: "update"
-		});
+		this.loaded = true;
 		
-		Mojo.Log.info("useDefaultDB: Notification sent");
+		//Mojo.Controller.getAppController().sendToNotificationChain({
+		//	type: "update"
+		//});
+		//
+		//Mojo.Log.info("useDefaultDB: Notification sent");
 	}
  });

@@ -52,10 +52,7 @@ function AppAssistant() {
 AppAssistant.prototype.setup = function() {
 	Mojo.Log.info("AppAssistant.setup:");
 	
-	Calesco.Prefs.initialize();
-	
 	this.teas = new Teas(); 
-	this.teas.loadDB(); 
 };
 
 AppAssistant.prototype.handleLaunch = function(params){

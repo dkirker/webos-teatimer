@@ -317,15 +317,28 @@ TeaListViewAssistant.prototype.setup = function() {
 	this.controller.listen('lstTea', Mojo.Event.listDelete, this.lstDeleteHandler);
 	this.controller.listen('lstTea', Mojo.Event.listReorder, this.lstReorderHandler);
 	
-	this.timer = this.controller.window.setInterval(this.handleInterval.bind(this), 500);
+	this.controller.setupWidget("spnLoading",
+		{spinnerSize: 'large'},
+		this.spnLoadingModel = {spinning: true}
+	);
+	
+	this.timer = this.controller.window.setInterval(this.delayedLoading.bind(this), 500);
+	this.teas.loadDB();
 };
 
-TeaListViewAssistant.prototype.handleInterval = function() {
+TeaListViewAssistant.prototype.delayedLoading = function() {
 	if (this.teas.loaded) {
-		Mojo.Log.info("handleInterval: database load update %j", this.teas.list);
+		Mojo.Log.info("delayedLoading: database load update %j", this.teas.list);
+		
+		Calesco.Prefs.initialize();
+		
 		this.teasModel.items = this.teas.list;
 		this.controller.modelChanged(this.teasModel);
 		this.controller.window.clearInterval(this.timer);
+		
+		this.spnLoadingModel.spinning = false;
+		this.controller.modelChanged(this.spnLoadingModel);
+		this.controller.get("scrim").hide();
 	}
 };
 

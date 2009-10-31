@@ -24,6 +24,16 @@ var Teas = Class.create ({
 		this.list = []; //this.getDefaultList();
 	},
 	
+	sort: function() {
+		Mojo.Log.info("teas.sort:");
+		this.list.sort(this.teaCompare.bind(this));
+		this.storeDB();
+	},
+	
+	teaCompare: function(a,b) {
+		return  (a.name < b.name) ? -1 : 1;
+	},
+	
 	getDefaultList: function() {
 		var returnList = [];
 		

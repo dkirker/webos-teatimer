@@ -18,28 +18,14 @@
  * 
  *****************************************************************************/
 
-function PreferencesAssistant() {
+function PreferencesAssistant(teas) {
 	/* this is the creator function for your scene assistant object. It will be passed all the 
 	   additional parameters (after the scene name) that were passed to pushScene. The reference
 	   to the scene controller (this.controller) has not be established yet, so any initialization
 	   that needs the scene controller should be done in the setup function below. */
+	
+	this.teas = teas;
 }
-
-PreferencesAssistant.prototype.handleTimerAutostart = function(event) {
-	Calesco.timerAutostart = this.timerAutostartModel.value;
-};
-
-PreferencesAssistant.prototype.handleTeaTempUnit = function(event) {
-	Calesco.teaTempUnit = this.teaTempUnitModel.value;
-};
-
-PreferencesAssistant.prototype.handleTeaAmntUnit = function(event) {
-	Calesco.teaAmntUnit = this.teaAmntUnitModel.value;
-};
-
-PreferencesAssistant.prototype.handleTeaWvolUnit = function(event) {
-	Calesco.teaWvolUnit = this.teaWvolUnitModel.value;
-};
 
 PreferencesAssistant.prototype.selectAlarmSound = function(result) {
 	//Mojo.Log.info("selectAlarmSound: %j", result);
@@ -59,22 +45,6 @@ PreferencesAssistant.prototype.handleAlarmSound = function(event) {
 	}, this.controller.stageController);
 };
 
-PreferencesAssistant.prototype.handleAlarmVibrate = function (event) {
-	Calesco.alarmVibrate = this.alarmVibrateModel.value;
-};
-
-PreferencesAssistant.prototype.handleAlarmRepeat = function (event) {
-	Calesco.alarmRepeat = this.alarmRepeatModel.value;
-};
-
-PreferencesAssistant.prototype.handleAlarmRepeatCount = function (event) {
-	Calesco.alarmRepeatCount = this.alarmRepeatCountModel.value;
-};
-
-PreferencesAssistant.prototype.handleAlarmRepeatDelay = function (event) {
-	Calesco.alarmRepeatDelay = this.alarmRepeatDelayModel.value;
-};
-
 PreferencesAssistant.prototype.handleCommand = function(event) {
 	if (event.type == Mojo.Event.command) {
 		switch(event.command){
@@ -82,6 +52,7 @@ PreferencesAssistant.prototype.handleCommand = function(event) {
 				Calesco.Prefs.setDefaults();
 				Calesco.Prefs.store();
 				
+				this.teaSortModel.value = Calesco.teaSort;
 				this.teaTempUnitModel.value = Calesco.teaTempUnit;
 				this.teaAmntUnitModel.value = Calesco.teaAmntUnit;
 				this.teaWvolUnitModel.value = Calesco.teaWvolUnit;
@@ -92,6 +63,7 @@ PreferencesAssistant.prototype.handleCommand = function(event) {
 				this.alarmRepeatDelayModel.value = Calesco.alarmRepeatDelay;
 								
 				this.controller.get("alarmSoundName").innerHTML = Calesco.alarmSoundName;
+				this.controller.modelChanged(this.teaSortModel);
 				this.controller.modelChanged(this.teaTempUnitModel);
 				this.controller.modelChanged(this.teaAmntUnitModel);
 				this.controller.modelChanged(this.teaWvolUnitModel);
@@ -123,6 +95,17 @@ PreferencesAssistant.prototype.setup = function() {
 	this.controller.get("alarmSoundName").innerHTML = Calesco.alarmSoundName;
 	
 	/* setup widgets here */
+	this.controller.setupWidget("selSort",
+		{
+			label: $L("Sort"),
+			choices : [ 
+				{label: $L("Alphabetical"), value: 1},
+				{label: $L("Custom"), value: 0}
+			]
+		},
+		this.teaSortModel = { value : Calesco.teaSort }
+	);
+	
 	this.controller.setupWidget("selTempUnit",
 		{
 			label: $L("Temperature"),
@@ -208,26 +191,11 @@ PreferencesAssistant.prototype.setup = function() {
 		this.alarmRepeatDelayModel = { value: Calesco.alarmRepeatDelay }
 	 );
 	
-	/* add event handlers to listen to events from widgets */
-	this.timerAutostartHandler = this.handleTimerAutostart.bind(this);
-	this.teaTempUnitHandler = this.handleTeaTempUnit.bind(this);
-	this.teaAmntUnitHandler = this.handleTeaAmntUnit.bind(this);
-	this.teaWvolUnitHandler = this.handleTeaWvolUnit.bind(this);
-	this.alarmSoundHandler = this.handleAlarmSound.bind(this);
-	this.alarmVibrateHandler = this.handleAlarmVibrate.bind(this);
-	this.alarmRepeatHandler = this.handleAlarmRepeat.bind(this);
-	this.alarmRepeatCountHandler = this.handleAlarmRepeatCount.bind(this);
-	this.alarmRepeatDelayHandler = this.handleAlarmRepeatDelay.bind(this);
+	this.controller.setInitialFocusedElement('selSort');
 	
-	this.controller.listen("togAutostart", Mojo.Event.propertyChange, this.timerAutostartHandler);
-	this.controller.listen('selTempUnit', Mojo.Event.propertyChange, this.teaTempUnitHandler);
-	this.controller.listen('selAmntUnit', Mojo.Event.propertyChange, this.teaAmntUnitHandler);
-	this.controller.listen('selWvolUnit', Mojo.Event.propertyChange, this.teaWvolUnitHandler);
+	/* add event handlers to listen to events from widgets */
+	this.alarmSoundHandler = this.handleAlarmSound.bind(this);
 	this.controller.listen('alarmSoundRow', Mojo.Event.tap, this.alarmSoundHandler);
-	this.controller.listen('togAlarmVibrate', Mojo.Event.propertyChange, this.alarmVibrateHandler);
-	this.controller.listen('togAlarmRepeat', Mojo.Event.propertyChange, this.alarmRepeatHandler);
-	this.controller.listen('intRepeatCount', Mojo.Event.propertyChange, this.alarmRepeatCountHandler);
-	this.controller.listen('intRepeatDelay', Mojo.Event.propertyChange, this.alarmRepeatDelayHandler);
 };
 
 PreferencesAssistant.prototype.activate = function(event) {
@@ -244,13 +212,21 @@ PreferencesAssistant.prototype.deactivate = function(event) {
 PreferencesAssistant.prototype.cleanup = function(event) {
 	/* this function should do any cleanup needed before the scene is destroyed as 
 	   a result of being popped off the scene stack */
-	this.controller.stopListening("togAutostart", Mojo.Event.propertyChange, this.timerAutostartHandler);
-	this.controller.stopListening('selTempUnit', Mojo.Event.propertyChange, this.teaTempUnitHandler);
+	
 	this.controller.stopListening('alarmSoundRow', Mojo.Event.tap, this.alarmSoundHandler);
-	this.controller.stopListening('togAlarmVibrate', Mojo.Event.propertyChange, this.alarmVibrateHandler);
-	this.controller.stopListening('togAlarmRepeat', Mojo.Event.propertyChange, this.alarmRepeatHandler);
-	this.controller.stopListening('intRepeatCount', Mojo.Event.propertyChange, this.alarmRepeatCountHandler);
-	this.controller.stopListening('intRepeatDelay', Mojo.Event.propertyChange, this.alarmRepeatDelayHandler);
+
+	Calesco.teaSort = Number(this.teaSortModel.value);
+	if (Calesco.teaSort) {
+		this.teas.sort();
+	}
+	Calesco.teaTempUnit = this.teaTempUnitModel.value;
+	Calesco.teaAmntUnit = this.teaAmntUnitModel.value;
+	Calesco.teaWvolUnit = this.teaWvolUnitModel.value;
+	Calesco.timerAutostart = this.timerAutostartModel.value;
+	Calesco.alarmVibrate = this.alarmVibrateModel.value;
+	Calesco.alarmRepeat = this.alarmRepeatModel.value;
+	Calesco.alarmRepeatCount = this.alarmRepeatCountModel.value;
+	Calesco.alarmRepeatDelay = this.alarmRepeatDelayModel.value;
 
 	Calesco.Prefs.store();
 };

@@ -33,6 +33,7 @@ Calesco.Prefs = ({
 		// Assign cookie data to globals
 		if (oldPrefs) {
 			if (oldPrefs.appVersion == Calesco.appVersion) {			
+				Calesco.teaSort = oldPrefs.teaSort;
 				Calesco.teaTempUnit = oldPrefs.teaTempUnit;
 				Calesco.teaAmntUnit = oldPrefs.teaAmntUnit;
 				Calesco.teaWvolUnit = oldPrefs.teaWvolUnit;
@@ -105,6 +106,7 @@ Calesco.Prefs = ({
 		Calesco.alarmSoundName = $L("Default");
 		Calesco.alarmSoundPath = Mojo.appPath + "/sounds/alarm.mp3";
 		Calesco.alarmVibrate = 0;
+		Calesco.teaSort = 0;
 	},
 	
 	store: function() {
@@ -112,6 +114,7 @@ Calesco.Prefs = ({
 		//return;
 		this.cookieData.put({
 			appVersion: Calesco.appVersion,
+			teaSort: Calesco.teaSort,
 			teaTempUnit: Calesco.teaTempUnit,
 			teaAmntUnit: Calesco.teaAmntUnit,
 			teaWvolUnit: Calesco.teaWvolUnit,

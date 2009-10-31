@@ -96,6 +96,11 @@ TeaListViewAssistant.prototype.timeFormatter = function(value) {
 TeaListViewAssistant.prototype.handleCommand = function(event) {
 	if(event.type == Mojo.Event.command) {
 		switch(event.command) {
+			case "do-Sort":
+				Mojo.Log.info("do-Sort");
+				this.teas.sort();
+				this.controller.modelChanged(this.teasModel);
+			break;
 			case "do-Add":
 				Mojo.Log.info("do-Add");
 				this.controller.stageController.pushScene("tea-view", this.teas, event.item, false);	
@@ -231,10 +236,27 @@ TeaListViewAssistant.prototype.filterFilter = function(event) {
     }
 };
 
+TeaListViewAssistant.prototype.listDivider = function(item) {
+	if (Calesco.teaSort) {
+		return item.name.substr(0,1);
+	}
+};
+
 TeaListViewAssistant.prototype.setup = function() {
 	Mojo.Log.info("TeaListViewAssistant: setup");
 	/* this function is for setup tasks that have to happen when the scene is first created */
-	this.controller.setupWidget(Mojo.Menu.appMenu, Calesco.MenuAttr, Calesco.MenuModel);
+	
+	this.appMenuModel = {
+		visible : true,
+		items: [
+		//	{label: "Erase all data", command: "do-Erase"},
+			Mojo.Menu.editItem,
+			{label: $L("Sort"), command: "do-Sort"},
+			{label: $L("Preferences"), command: "do-Preferences"},
+			{label: $L("Help"), command: "do-Help"}
+		]
+	};
+	this.controller.setupWidget(Mojo.Menu.appMenu, Calesco.MenuAttr, this.appMenuModel);
 			
 	/* use Mojo.View.render to render view templates and add them to the scene, if needed. */
 	this.cmdMenuModel = {
@@ -286,13 +308,14 @@ TeaListViewAssistant.prototype.setup = function() {
 	);
 
 	this.controller.setupWidget("lstTea",
-		{
+		this.teasAttr = {
 			itemTemplate: "tea-list-view/teaRowTemplate",
 			listTemplate: "tea-list-view/teaListTemplate",		
 			//addItemLabel: "Add...",
 			swipeToDelete: true,
 			autoconfirmDelete: false,
 			reorderable: true,
+			dividerFunction: this.listDivider.bind(this),
 			formatters: { temp: this.tempFormatter.bind(this),
 						  amnt: this.amntFormatter.bind(this),
 						  wvol: this.wvolFormatter.bind(this),

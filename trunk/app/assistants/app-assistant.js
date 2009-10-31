@@ -125,7 +125,7 @@ AppAssistant.prototype.handleCommand = function(event) {
 				stageController.pushScene("support");
 			break;
 			case "do-Preferences":
-				stageController.pushScene("preferences");
+				stageController.pushScene("preferences", this.teas);
 			break;
 			//case "do-Erase":
 			//	this.teas.eraseDB();

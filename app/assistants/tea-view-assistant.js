@@ -94,6 +94,10 @@ TeaViewAssistant.prototype.done = function() {
 		});
 	}
 	
+	if (Calesco.teaSort) {
+		this.teas.sort();
+	}
+	
 	this.teas.storeDB();
 	
 	Mojo.Log.info("done: %j", this.teas.list);

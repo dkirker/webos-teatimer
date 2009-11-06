@@ -101,7 +101,10 @@ TeaViewAssistant.prototype.done = function() {
 	this.teas.storeDB();
 	
 	Mojo.Log.info("done: %j", this.teas.list);
-	this.controller.stageController.popScene({});
+	
+	if (!this.edit) {
+		this.controller.stageController.popScene({});
+	}
 };
 
 
@@ -205,23 +208,26 @@ TeaViewAssistant.prototype.setup = function() {
 	this.controller.setupWidget(Mojo.Menu.appMenu, Calesco.MenuAttr, Calesco.MenuModel);
 	
 	/* use Mojo.View.render to render view templates and add them to the scene, if needed. */
-	this.cmdMenuModel = {
-		visible: true,
-		items: [{
-			items: [{
-				disabled: false,
-				label: $L("Done"),
-				command: "do-Done"
-			}]
-		}]
-	};
 	if (this.edit) {
-		this.cmdMenuModel.items[1] = {};
-		this.cmdMenuModel.items[2] = {
+		this.cmdMenuModel = {
+			visible: true,
+			items: [{},{
+				items: [{
+					disabled: false,
+					icon: "send",
+					command: "do-Send"
+				}]
+			}]
+		};
+	} else {
+		this.cmdMenuModel = {
+			visible: true,
 			items: [{
-				disabled: false,
-				icon: "send",
-				command: "do-Send"
+				items: [{
+					disabled: false,
+					label: $L("Done"),
+					command: "do-Done"
+				}]
 			}]
 		};
 	}
@@ -303,6 +309,10 @@ TeaViewAssistant.prototype.deactivate = function(event) {
 TeaViewAssistant.prototype.cleanup = function(event) {
 	/* this function should do any cleanup needed before the scene is destroyed as 
 	   a result of being popped off the scene stack */
+	
+	if (this.edit) {
+		this.done()
+	}
 	
 //	this.controller.get("txtName").removeEventListener("paste", this.pasteHandler, false);
 };

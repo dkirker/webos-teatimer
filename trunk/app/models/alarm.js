@@ -35,7 +35,7 @@ function CalescoAlarm(scene, id) {
 		this.audioObject.addEventListener(Media.Event.X_PALM_CONNECT, this.mediaConnectHandler);
 		this.audioObject.addEventListener(Media.Event.X_PALM_DISCONNECT, this.mediaDisconnectHandler);
 		this.audioObject.addEventListener(Media.Event.X_PALM_WATCHDOG , this.mediaDisconnectHandler);	
-};
+}
 	
 CalescoAlarm.prototype.cleanup = function() {
 		Mojo.Log.info("Alarm.cleanup");

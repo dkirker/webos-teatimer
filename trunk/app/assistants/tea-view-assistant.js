@@ -87,7 +87,7 @@ TeaViewAssistant.prototype.done = function() {
 			sec = parseInt(this.timeModel.value);
 		}
 		
-		if (sec == 0 || sec > 600) {
+		if (sec === 0 || sec > 600) {
 			Mojo.Log.info("done: Invalid Tea steep time!");
 			Mojo.Controller.errorDialog($L("Steep time must be greater than 0 and less than 10:00."), this.controller.window);	
 			
@@ -179,7 +179,7 @@ TeaViewAssistant.prototype.checkTimeChars = function(keyCode) {
 	}
 	
 	return false;
-}
+};
 
 TeaViewAssistant.prototype.sendTea = function() {
 	Mojo.Log.info("sendTea:");
@@ -212,8 +212,7 @@ TeaViewAssistant.prototype.sendTea = function() {
 			}
 		}
 	});
-}
-
+};
 
 TeaViewAssistant.prototype.handleCommand = function(event) {
 	if(event.type == Mojo.Event.command) {
@@ -269,11 +268,12 @@ TeaViewAssistant.prototype.setup = function() {
 	this.controller.setupWidget("txtName", {
 		hintText : $L("Name..."),
 		autoFocus: true,
-		autoReplace: true
+		autoReplace: true,
+		textCase: Mojo.Widget.steModeTitleCase
 	}, this.nameModel = { value : this.item.name });
 	
 	var secstr = this.item.time;
-	if (secstr != "") {
+	if (secstr !== "") {
 		secstr = sec2str(this.item.time);
 	}
 	this.controller.setupWidget("txtTime", {
@@ -315,7 +315,7 @@ TeaViewAssistant.prototype.namePaste = function(event) {
 	Mojo.Log.info("namePaste: %j", event);
 	Mojo.Log.info("namePaste:", event.clipboardData.getData('text'));
 	//event.preventDefault();
-}
+};
 
 TeaViewAssistant.prototype.activate = function(event) {
 	/* put in event handlers here that should only be in effect when this scene is active. For
@@ -338,7 +338,7 @@ TeaViewAssistant.prototype.cleanup = function(event) {
 	   a result of being popped off the scene stack */
 	
 	if (this.edit) {
-		this.done()
+		this.done();
 	}
 	
 //	this.controller.get("txtName").removeEventListener("paste", this.pasteHandler, false);

@@ -128,7 +128,7 @@ TimerViewAssistant.prototype.timeup = function() {
 TimerViewAssistant.prototype.stopAlarm = function () {
 	this.alarm.stop();
 	this.power.uninhibit();
-}
+};
 
 TimerViewAssistant.prototype.handleInterval = function () {
 	cur = new Date();

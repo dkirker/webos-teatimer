@@ -44,23 +44,41 @@ function TeaViewAssistant(teas, item, edit) {
 TeaViewAssistant.prototype.done = function() {
 	Mojo.Log.info("done: ");
 	
+	var badname = 0;
+	var badtime = 0;
+	
 	if (this.nameModel.value === "") {
 		Mojo.Log.info("done: Invalid Tea name!");
 		Mojo.Controller.errorDialog($L("Tea name required!"), this.controller.window);
-		return;
+		
+		if (this.edit) {
+			badname = 1;
+		} else {
+			return;
+		}
 	}
 	
 	var sec;
 	if (this.timeModel.value === "") {
 		Mojo.Log.info("done: Invalid Tea steep time!");
 		Mojo.Controller.errorDialog($L("Steep time is required and must be less than 10:00."), this.controller.window);	
-		return;
+		
+		if (this.edit) {
+			badtime = 1;
+		} else {
+			return;
+		}
 	} else {
 		if (this.timeModel.value.search(/:[0-9]$/) >= 0 ||
 			this.timeModel.value.search(/:$/) >= 0) {
 			Mojo.Log.info("done: Invalid Tea steep time format!");
 			Mojo.Controller.errorDialog($L("Invalid time format."), this.controller.window);	
-			return;
+			
+			if (this.edit) {
+				badtime = 1;
+			} else {
+				return;
+			}
 		}
 		
 		if (this.timeModel.value.search(/:/) >= 0) {
@@ -72,13 +90,22 @@ TeaViewAssistant.prototype.done = function() {
 		if (sec == 0 || sec > 600) {
 			Mojo.Log.info("done: Invalid Tea steep time!");
 			Mojo.Controller.errorDialog($L("Steep time must be greater than 0 and less than 10:00."), this.controller.window);	
-			return;
+			
+			if (this.edit) {
+				badtime = 1;
+			} else {
+				return;
+			}
 		}
 	}
 	
 	if (this.edit) {
-		this.item.name = this.nameModel.value;
-		this.item.time = sec;
+		if (!badname) {
+			this.item.name = this.nameModel.value;
+		}
+		if (!badtime) {
+			this.item.time = sec;
+		}
 		this.item.temp = this.tempModel.value;
 		this.item.amnt = this.amntModel.value;
 		this.item.wvol = this.wvolModel.value;

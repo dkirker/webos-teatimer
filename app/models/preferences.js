@@ -49,6 +49,10 @@ Calesco.Prefs = ({
 			else {
 				// migration routines
 				switch (oldPrefs.appVersion) {
+					case "0.6.4":
+						Mojo.Log.info("Migrating prefs from version 0.6.4");
+							
+						Calesco.teaSort = oldPrefs.teaSort;
 					case "0.6.3":
 					case "0.6.2":
 					case "0.6.1":

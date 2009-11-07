@@ -22,7 +22,7 @@
 function CalescoPower(scene) {
 		this.sceneController = scene;
 		this.inc = 0;
-};
+}
 	
 CalescoPower.prototype.inhibit = function(seconds) {
 		Mojo.Log.info("Power.inhibit:");

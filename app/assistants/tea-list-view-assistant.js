@@ -315,6 +315,7 @@ TeaListViewAssistant.prototype.setup = function() {
 			swipeToDelete: true,
 			autoconfirmDelete: false,
 			reorderable: true,
+			renderLimit: 40,
 			dividerFunction: this.listDivider.bind(this),
 			formatters: { temp: this.tempFormatter.bind(this),
 						  amnt: this.amntFormatter.bind(this),

@@ -108,7 +108,7 @@ Calesco.Prefs = ({
 		Calesco.alarmRepeatCount = 10;
 		Calesco.alarmRepeatDelay = 2; // seconds
 		Calesco.alarmSoundName = $L("Default");
-		Calesco.alarmSoundPath = Mojo.appPath + "/sounds/alarm.mp3";
+		Calesco.alarmSoundPath = Mojo.appPath + "/sounds/melody1.mp3";
 		Calesco.alarmVibrate = 0;
 		Calesco.teaSort = 0;
 	},

@@ -145,6 +145,7 @@ CalescoAlarm.prototype.audioEnded = function(event) {
 			this.repeatCount--;
 		} else {
 			// clean up
+			this.audioObject.pause();
 			this.audioObject.removeEventListener(Media.Event.ENDED, this.audioEndedHandler);
 		}
 };

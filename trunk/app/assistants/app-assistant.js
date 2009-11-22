@@ -108,21 +108,8 @@ AppAssistant.prototype.handleCommand = function(event) {
 	
 	if (event.type == Mojo.Event.command) {
 		switch(event.command){
-			//case "do-About":
-			//	currentScene.showAlertDialog({
-			//		onChoose: function(value) {},
-			//		title: "#{name} - v#{version}".interpolate({
-			//			name: Calesco.appName,
-			//			version: Calesco.appVersion
-			//		}),
-			//		message: "Copyright 2009, Richard Ferguson.",
-			//		choices:[{
-			//			label: "OK", value:""
-			//		}]
-			//	});
-			//break;
 			case "do-Help":
-				stageController.pushScene("support");
+				stageController.pushAppSupportInfoScene();
 			break;
 			case "do-Preferences":
 				stageController.pushScene("preferences", this.teas);

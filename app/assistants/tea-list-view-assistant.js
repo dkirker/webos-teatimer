@@ -43,6 +43,11 @@ TeaListViewAssistant.prototype.handleLstTeaDelete = function(event){
 	this.teas.list.splice(index,1);
 	this.teas.storeDB();
 	
+	this.controller.window.setTimeout(this.delayedTeaModelUpdate.bind(this), 100);
+};
+
+
+TeaListViewAssistant.prototype.delayedTeaModelUpdate = function(event){
 	this.controller.modelChanged(this.teasModel);
 	this.updateFilterListModel(false);
 };

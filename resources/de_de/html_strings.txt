@@ -1,0 +1,11 @@
+﻿HTML Extras
+  
+Preferences : Praeferenzen
+Tea settings : Tee Einstellungen
+Timer settings : Teeuhr Einstellungen
+Autostart : Autostart
+Alarm settings : Alarm Einstellungen
+Vibrate : Vibrieren
+Sound : Ton
+Repeat : Wiederholen
+

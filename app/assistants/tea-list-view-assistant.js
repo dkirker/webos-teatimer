@@ -71,24 +71,36 @@ TeaListViewAssistant.prototype.handleLstTeaReorder = function(event){
 //};
 
 TeaListViewAssistant.prototype.tempFormatter = function(value) {
+	var str = "";
 	if (value) {
-		return "- " + value + "'" + Calesco.teaTempUnit;
+		str = "- " + value;
+		if (!hasUnit(value)) {
+			str += "'" + Calesco.teaTempUnit;
+		}
 	}
-	return "";
+	return str;
 };
 
 TeaListViewAssistant.prototype.amntFormatter = function(value) {
+	var str = "";
 	if (value) {
-		return "- " + value + Calesco.teaAmntUnit;
+		str = "- " + value;
+		if (!hasUnit(value)) {
+			str += Calesco.teaAmntUnit;
+		}
 	}
-	return "";
+	return str;
 };
 
 TeaListViewAssistant.prototype.wvolFormatter = function(value) {
+	var str = "";
 	if (value) {
-		return "- " + value + Calesco.teaWvolUnit;
+		str = "- " + value;
+		if (!hasUnit(value)) {
+			str += Calesco.teaWvolUnit;
+		}
 	}
-	return "";
+	return str;
 };
 
 TeaListViewAssistant.prototype.timeFormatter = function(value) {
@@ -96,6 +108,19 @@ TeaListViewAssistant.prototype.timeFormatter = function(value) {
 		return sec2str(value);
 	}
 	return "";
+};
+
+
+TeaListViewAssistant.prototype.connectionCheckSuccess = function(response) {
+	if (response.isInternetConnectionAvailable) {
+		this.controller.stageController.pushScene("brand-list-view", this.teas);
+	} else {
+		Mojo.Controller.errorDialog($L("Internet connection required to browse teas!"), this.controller.window);
+	}
+};
+
+TeaListViewAssistant.prototype.connectionCheckFailure = function(response) {
+	Mojo.Controller.errorDialog($L("An error occurred while fetching a list of teas to browse.  Please try again later."), this.controller.window);
 };
 
 TeaListViewAssistant.prototype.handleCommand = function(event) {
@@ -107,8 +132,20 @@ TeaListViewAssistant.prototype.handleCommand = function(event) {
 				this.controller.modelChanged(this.teasModel);
 			break;
 			case "do-Add":
+			case "add-custom":
 				Mojo.Log.info("do-Add");
 				this.controller.stageController.pushScene("tea-view", this.teas, event.item, false);	
+			break;
+			case "add-brand":
+				Mojo.Log.info("add-brand");
+					
+				// check for internet connection
+				this.controller.serviceRequest('palm://com.palm.connectionmanager', {
+					method: 'getstatus',
+					parameters: {subscribe:false},
+					onSuccess: this.connectionCheckSuccess.bind(this),
+					onFailure: this.connectionCheckFailure.bind(this)
+				});
 			break;
 			case "preset-30s":
 				this.controller.stageController.pushScene("timer-view", false, false, {
@@ -270,7 +307,13 @@ TeaListViewAssistant.prototype.setup = function() {
 			items: [{
 				disabled: false,
 				icon: "new",
+				//submenu: "add-menu"
 				command: "do-Add"
+			},
+			{
+				disabled: false,
+				icon: "xapp-web",
+				command: "add-brand"
 			}]
 		},{},{
 			items: [{
@@ -284,6 +327,12 @@ TeaListViewAssistant.prototype.setup = function() {
 	this.controller.get("headerlabel").innerHTML = $L("Tea List");
 	
 	this.controller.setupWidget(Mojo.Menu.commandMenu, undefined, this.cmdMenuModel);
+	//this.controller.setupWidget("add-menu", undefined, this.addModel = {
+	//	items: [
+	//		{ label: $L("Custom Tea"), command: "add-custom"},
+	//		{ label: $L("Browse..."), command: "add-brand"}
+	//	]
+	//});
 	this.controller.setupWidget("presets-menu", undefined, this.presetsModel = {
 		items: [
 			{ label: $L("30 Seconds"), command: "preset-30s"},
@@ -320,7 +369,8 @@ TeaListViewAssistant.prototype.setup = function() {
 			swipeToDelete: true,
 			autoconfirmDelete: false,
 			reorderable: true,
-			renderLimit: 40,
+			renderLimit: 200,
+			lookAhead: 100,
 			dividerFunction: this.listDivider.bind(this),
 			formatters: { temp: this.tempFormatter.bind(this),
 						  amnt: this.amntFormatter.bind(this),

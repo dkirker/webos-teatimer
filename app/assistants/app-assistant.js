@@ -69,6 +69,7 @@ AppAssistant.prototype.handleLaunch = function(params){
 		} else {
 			Mojo.Log.info("handleLaunch: create main stage");
 			var pushMainScene = function(stageController) {
+				stageController.setWindowOrientation("free");
 				stageController.pushScene("tea-list-view", this.teas);
 			};
 			var stageArguments = {
@@ -88,6 +89,7 @@ AppAssistant.prototype.handleLaunch = function(params){
 				} else {
 					Mojo.Log.info("handleLaunch: create main stage");
 					var pushMainSceneN = function(stageController) {
+						stageController.setWindowOrientation("free");
 						stageController.pushScene("tea-list-view", this.teas);
 					};
 					var stageArgumentsN = {

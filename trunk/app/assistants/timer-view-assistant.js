@@ -180,7 +180,10 @@ TimerViewAssistant.prototype.setTitleStr = function() {
 		} else {
 			titleStr += " - ";
 		}
-		titleStr += this.item.temp + "'" + Calesco.teaTempUnit;
+		titleStr += this.item.temp;
+		if (!hasUnit(this.item.temp)) {
+			titleStr += "'" + Calesco.teaTempUnit;
+		}
 	}
 	if (this.item.amnt) {
 		if (firstParam) {
@@ -189,7 +192,10 @@ TimerViewAssistant.prototype.setTitleStr = function() {
 		} else {
 			titleStr += " - ";
 		}
-		titleStr += this.item.amnt + Calesco.teaAmntUnit;	
+		titleStr += this.item.amnt;	
+		if (!hasUnit(this.item.amnt)) {
+			titleStr += Calesco.teaAmntUnit;
+		}
 	}
 	if (this.item.wvol) {
 		if (firstParam) {
@@ -198,7 +204,10 @@ TimerViewAssistant.prototype.setTitleStr = function() {
 		} else {
 			titleStr += " - ";
 		}
-		titleStr += this.item.wvol + Calesco.teaWvolUnit;	
+		titleStr += this.item.wvol;	
+		if (!hasUnit(this.item.wvol)) {
+			titleStr += Calesco.teaWvolUnit;
+		}
 	}
     this.controller.get("teaName").innerHTML = titleStr;
 	

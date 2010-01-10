@@ -37,6 +37,22 @@ function str2sec(str) {
 	return sec;
 }
 
+function f2c(temp) {
+	return parseInt((temp-32) * 5.0/9.0);
+}
+
+function oz2ml(oz) {
+	return parseInt(oz * 29.5735296);
+}
+
+function hasUnit(val) {
+	var str = String(val);
+	if (str.search(/[a-zA-Z]/) > 0) {
+		return true;
+	}
+	return false;
+}
+
 function isUSRegion() {
 	Mojo.Log.info("isUSRegion:");
 	var loc = Mojo.Locale.getCurrentLocale();
@@ -45,3 +61,4 @@ function isUSRegion() {
 	}
 	return false;
 }
+

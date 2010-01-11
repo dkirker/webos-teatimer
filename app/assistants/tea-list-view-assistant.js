@@ -110,6 +110,13 @@ TeaListViewAssistant.prototype.timeFormatter = function(value) {
 	return "";
 };
 
+TeaListViewAssistant.prototype.brandFormatter = function(value) {
+	if (value) {
+		return "brand";
+	}
+	return "";
+};
+
 
 TeaListViewAssistant.prototype.connectionCheckSuccess = function(response) {
 	if (response.isInternetConnectionAvailable) {
@@ -375,7 +382,8 @@ TeaListViewAssistant.prototype.setup = function() {
 			formatters: { temp: this.tempFormatter.bind(this),
 						  amnt: this.amntFormatter.bind(this),
 						  wvol: this.wvolFormatter.bind(this),
-						  time: this.timeFormatter.bind(this)}
+						  time: this.timeFormatter.bind(this),
+						  brand: this.brandFormatter.bind(this)}
 		},
 		this.teasModel = { 
 			items : this.teas.list

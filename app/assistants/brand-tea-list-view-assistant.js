@@ -211,7 +211,9 @@ BrandTeaListViewAssistant.prototype.handleCommand = function(event) {
 						if (this.brandteas[i].amnt) { pushtea.amnt = this.brandteas[i].amnt; }
 						if (this.brandteas[i].wvol) { pushtea.wvol = this.brandteas[i].wvol; }
 						
-						pushtea.name = this.brand.brand + " " + this.brandteas[i].name;
+						pushtea.brand = this.brand.brand;
+//						pushtea.name = this.brand.brand + " " + this.brandteas[i].name;
+						pushtea.name = this.brandteas[i].name;
 						if (pushtea.name.search(/\bTea\b/) < 0) {
 							pushtea.name += " " + this.brandteas[i].type;
 						}

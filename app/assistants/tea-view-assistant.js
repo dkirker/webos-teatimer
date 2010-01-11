@@ -30,6 +30,7 @@ function TeaViewAssistant(teas, item, edit) {
 	if (!this.edit) {
 		this.item = {
 			name: "",
+			brand: "",
 			time: "",
 			temp: "",
 			amnt: "",
@@ -106,6 +107,7 @@ TeaViewAssistant.prototype.done = function() {
 		if (!badtime) {
 			this.item.time = sec;
 		}
+		this.item.brand = this.brandModel.value;
 		this.item.temp = this.tempModel.value;
 		this.item.amnt = this.amntModel.value;
 		this.item.wvol = this.wvolModel.value;
@@ -113,6 +115,7 @@ TeaViewAssistant.prototype.done = function() {
 	} else {
 		this.teas.list.push({
 			name: this.nameModel.value,
+			brand: this.brandModel.value,
 			time: sec,
 			temp: this.tempModel.value,
 			amnt: this.amntModel.value,
@@ -187,6 +190,12 @@ TeaViewAssistant.prototype.sendTea = function() {
 	// FIXME: I10L 
 	var subjStr = this.nameModel.value;
 	var bodyStr = this.nameModel.value;
+	
+	if (this.brandModel.value) {
+		subjStr = this.brandModel.value + " " + subjStr;
+		bodyStr = this.brandModel.value + " " + bodyStr;
+	}
+	
 	bodyStr += "<br/>" + $L("Steep time: ") + this.timeModel.value;
 	if (this.amntModel.value) {
 		bodyStr += "<br/>" + $L("Amount of tea: ") + this.amntModel.value + Calesco.teaAmntUnit;
@@ -271,6 +280,12 @@ TeaViewAssistant.prototype.setup = function() {
 		autoReplace: true,
 		textCase: Mojo.Widget.steModeTitleCase
 	}, this.nameModel = { value : this.item.name });
+	
+	this.controller.setupWidget("txtBrand", {
+		hintText : $L("Brand..."),
+		autoReplace: true,
+		textCase: Mojo.Widget.steModeTitleCase
+	}, this.brandModel = { value : this.item.brand });
 	
 	var secstr = this.item.time;
 	if (secstr !== "") {

@@ -241,7 +241,7 @@ BrandListViewAssistant.prototype.brandsFailure = function(transport) {
 		title: $L("Error"),
 		message: $L("An error occurred while fetching a list of teas to browse.  Please try again later."),
 		choices:[
-			{label: $L('OK'), value:'ok', type:'color'}    
+			{label: $L("OK"), value:'ok', type:'color'}    
 		]
 	});	  
 };

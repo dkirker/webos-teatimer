@@ -47,7 +47,19 @@ BrandTeaListViewAssistant.prototype.handleLstTeaTap = function (event) {
 			}
 		});
 	} else {
-		this.controller.stageController.pushScene("timer-view", true, this.teas, event.item);
+		var pushtea = {};
+		if (event.item.type) { pushtea.type = event.item.type; }
+		if (event.item.time) { pushtea.time = event.item.time; }
+		if (event.item.temp) { pushtea.temp = event.item.temp; }
+		if (event.item.amnt) { pushtea.amnt = event.item.amnt; }
+		if (event.item.wvol) { pushtea.wvol = event.item.wvol; }
+		
+		pushtea.brand = this.brand.brand;
+		pushtea.name = event.item.name;		
+		if (pushtea.name.search(/\bTea\b/) < 0) {
+			pushtea.name += " " + event.item.type;
+		}
+		this.controller.stageController.pushScene("timer-view", true, this.teas, pushtea);
 	}	
 };
 
@@ -212,7 +224,6 @@ BrandTeaListViewAssistant.prototype.handleCommand = function(event) {
 						if (this.brandteas[i].wvol) { pushtea.wvol = this.brandteas[i].wvol; }
 						
 						pushtea.brand = this.brand.brand;
-//						pushtea.name = this.brand.brand + " " + this.brandteas[i].name;
 						pushtea.name = this.brandteas[i].name;
 						if (pushtea.name.search(/\bTea\b/) < 0) {
 							pushtea.name += " " + this.brandteas[i].type;
@@ -369,7 +380,7 @@ BrandTeaListViewAssistant.prototype.brandsFailure = function(transport) {
 		title: $L("Error"),
 		message: $L("An error occurred while fetching a list of teas to browse.  Please try again later."),
 		choices:[
-			{label: $L('OK'), value:'ok', type:'color'}    
+			{label: $L("OK"), value:'ok', type:'color'}    
 		]
 	});
 };

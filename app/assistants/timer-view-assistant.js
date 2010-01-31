@@ -172,6 +172,10 @@ TimerViewAssistant.prototype.handleBtnStart = function () {
 TimerViewAssistant.prototype.setTitleStr = function() {
 	// construct title str
 	var titleStr = this.tea_name;
+	if (this.item.brand) {
+		titleStr = this.item.brand + " " + titleStr; 
+	}
+	
 	var firstParam = 1;
 	if (this.item.temp) {
 		if (firstParam) {

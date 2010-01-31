@@ -130,6 +130,22 @@ TeaListViewAssistant.prototype.connectionCheckFailure = function(response) {
 	Mojo.Controller.errorDialog($L("An error occurred while fetching a list of teas to browse.  Please try again later."), this.controller.window);
 };
 
+TeaListViewAssistant.prototype.exportTeaList = function() {
+	var teaStr = this.teas.list.toJSON();
+	Mojo.Log.info(teaStr);
+	
+	this.controller.serviceRequest('palm://com.palm.applicationManager', {
+		method: "open",
+		parameters: {
+			id: 'com.palm.app.email',
+			params: {
+				summary: $L("My Tea List"),
+				text: teaStr
+			}
+		}
+	});
+};
+
 TeaListViewAssistant.prototype.handleCommand = function(event) {
 	if(event.type == Mojo.Event.command) {
 		switch(event.command) {
@@ -137,6 +153,14 @@ TeaListViewAssistant.prototype.handleCommand = function(event) {
 				Mojo.Log.info("do-Sort");
 				this.teas.sort();
 				this.controller.modelChanged(this.teasModel);
+			break;
+			case "do-Import":
+				Mojo.Log.info("do-Import");
+				this.controller.stageController.pushScene("tea-list-import-view", this.teas, this.teasModel);	
+			break;
+			case "do-Export":
+				Mojo.Log.info("do-Export");
+				this.exportTeaList();
 			break;
 			case "do-Add":
 			case "add-custom":
@@ -300,7 +324,11 @@ TeaListViewAssistant.prototype.setup = function() {
 		items: [
 		//	{label: "Erase all data", command: "do-Erase"},
 			Mojo.Menu.editItem,
-			{label: $L("Sort"), command: "do-Sort"},
+			{label: $L("Tea List"), items: [
+				{label: $L("Sort"), command: "do-Sort"},
+				{label: $L("Import..."), command: "do-Import"},
+				{label: $L("Export..."), command: "do-Export"}
+			]},
 			{label: $L("Preferences"), command: "do-Preferences"},
 			{label: $L("Help"), command: "do-Help"}
 		]
